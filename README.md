@@ -1,16 +1,57 @@
-# final_project_osg7
+# Flutter Daftar Makanan ( Tugas Akhir - OSG07 )
+Aplikasi Flutter daftar makanan (Tugas Akhir - OSG07) Team 2 dengan fitur : 
+- menampilkan daftar makanan, 
+- kategori makanan, 
+- fitur pencarian makanan dan 
+- detail makanan dari [TheMealDB](https://www.themealdb.com/api.php).
+- tentang aplikasi dan developer
+- menu (drawer / bottom navigation)
 
-A final project Online Study Group 7 Eudeka
+### Screenshot
+![ESPN Mobile App](https://cdn.vox-cdn.com/thumbor/5ZRASaKMcOSnBZ8FxORHlSIjX8k=/12x0:1237x817/920x613/filters:focal(12x0:1237x817):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/47789201/iPhone_Screenshot.0.0.jpg "source: theverge.com")
 
-## Getting Started
+### Built With
+- [Flutter](https://flutter.dev)
+- [TheMealDB](https://www.themealdb.com/api.php)
+- [BLoC](https://pub.dev/packages/bloc)
 
-This project is a starting point for a Flutter application.
+### Created By
+- [Mei Rusfandi](https://meirusfandi.com) as #Project Leader
+    - Halaman Login (2 poin)
+    - Fungsi Login (1 poin)
+    - Data Model (1 poin)
+- Joko Waluyo
+    - Halaman Pencarian (3 poin)
+    - Fungsi Pencarian (2 poin)
+- Deddy Triyadi Barnawan
+    - Design Pattern BLoC (3 poin)
+    - Fungsi REST API (2 poin)
+    - Fungsi CRUD SQLite (3 poin)
+- Hendra Basri 
+    - Design
+    - Comm
+- Mustofa Kamal
+    - Design
 
-A few resources to get you started if this is your first Flutter project:
+---
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+### Online Study Group Eudeka!
+Salah satu program dari [**Eudeka!**](https://www.eudeka.id) untuk belajar secara _full online_ via Whatsapp/Telegram dan Google Classroom, dengan para praktisi handal di bidangnya. Selain itu juga kamu dapat berkesempatan untuk memperluas koneksimu dengan peserta lain.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### OSG07 - Flutter Basic
+Dengan jangka waktu lebih kurang 2 bulan, peserta diharapkan dapat mengenal dan membuat aplikasi simple Flutter dengan menggunakan data dari internet (API).
+
+### Cara Mendaftar Online Study Group
+Untuk pendaftaran kelas selanjutnya, silahkan kunjungi atau hubungi kami di dawah ini.
+
+### Info Lebih Lengkap
+Website : [www.eudeka.id](https://www.eudeka.id)  
+Twitter: [@EudekaID](https://twitter.com/EudekaID)  
+Telegram : [@eudekainfo](https://t.me/eudekainfo)  
+Instagram : [@eudeka.id](https://instagram.com/eudeka.id)  
+WhatsApp : [0895351577557](https://wa.me/62895351577557)  
+Email : [info@eudeka.id](mailto:info@eudeka.id)  
+
+---
+
+###### tags: `Sample` `Eudeka` `OSG07` `Flutter` `Dart` `Final Project`
