@@ -1,5 +1,7 @@
-import 'package:final_project_osg7/core/model/model_categories.dart';
-import 'package:final_project_osg7/core/network/service_categories.dart';
+import 'package:final_project_osg7/ui/home/about_us.dart';
+import 'package:final_project_osg7/ui/home/dashboard.dart';
+import 'package:final_project_osg7/ui/home/notifications.dart';
+import 'package:final_project_osg7/ui/home/search.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -10,73 +12,145 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
-  ServiceCategories _serviceCategories;
+  // set properties
+  int _currentIndex = 0;
+  final List<Widget> _children = [
+        Dashboard(),
+        SearchMeals(),
+        AboutUs()
+  ];
 
-
-  @override
-  void initState() {
-    _serviceCategories = ServiceCategories();
-    super.initState();
-  }
+  // set default / active tab
+  Widget _currentScreen = Dashboard();
+  final PageStorageBucket _bucket = PageStorageBucket();
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Meal Categories'
-        ),
+      body: PageStorage(
+        bucket: _bucket,
+        child: _currentScreen,
       ),
-      body: FutureBuilder<ModelCategories>(
-        future: _serviceCategories.getCategories(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2
-                ),
-                physics: BouncingScrollPhysics(),
-                itemCount: snapshot.data.categories.length,
-                itemBuilder: (context, index) {
-                  var data = snapshot.data.categories[index];
-                  return snapshot.data.categories == null
-                      ? Text("No categories found.")
-                      : InkWell(
-                    child: Card(
-                      margin: const EdgeInsets.all(8.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          Center(
-                            child: Image.network(
-                              data.strCategoryThumb
-                            ),
-                          ),
-                          Text(
-                            data.strCategory,
-                            style: TextStyle(
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                          Text(
-                            data.strCategoryDescription,
-                            style: TextStyle(
-                              fontSize: 16.0,
-                            ),
-                            maxLines: 3,
-                            textAlign: TextAlign.center,
-                          )
-                        ],
-                      ),
+
+      floatingActionButton: FloatingActionButton(
+        child: Icon(
+          Icons.favorite,
+          color: Colors.red,
+          size: 32,
+        ),
+        backgroundColor: Colors.lightBlue,
+        onPressed: (){},
+      ),
+
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+
+      // bottom navigation bar
+      bottomNavigationBar: BottomAppBar(
+        shape: CircularNotchedRectangle(),
+        child: Container(
+          height: 60,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              MaterialButton(
+                minWidth: 40,
+                onPressed: () {
+                  setState(() {
+                    _currentScreen = Dashboard();
+                    _currentIndex = 0;
+                  });
+                },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Icon(
+                      Icons.home, 
+                      color: _currentIndex == 0 ? Colors.blue : Colors.grey,
                     ),
-                  );
-                }
-            );
-          }
-        },
+                    Text(
+                      'Dashboard',
+                      style: TextStyle(
+                        color: _currentIndex == 0 ? Colors.blue : Colors.grey,
+                      ) 
+                    )
+                  ],
+                ),
+              ),
+              MaterialButton(
+                minWidth: 40,
+                onPressed: () {
+                  setState(() {
+                    _currentScreen = SearchMeals();
+                    _currentIndex = 1;
+                  });
+                },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Icon(
+                      Icons.search, 
+                      color: _currentIndex == 1 ? Colors.blue : Colors.grey,
+                    ),
+                    Text(
+                      'Search Meals',
+                      style: TextStyle(
+                        color: _currentIndex == 1 ? Colors.blue : Colors.grey,
+                      ) 
+                    )
+                  ],
+                ),
+              ),
+              MaterialButton(
+                minWidth: 40,
+                onPressed: () {
+                  setState(() {
+                    _currentScreen = Notifications();
+                    _currentIndex = 2;
+                  });
+                },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Icon(
+                      Icons.notifications, 
+                      color: _currentIndex == 2 ? Colors.blue : Colors.grey,
+                    ),
+                    Text(
+                      'Notifications',
+                      style: TextStyle(
+                        color: _currentIndex == 2 ? Colors.blue : Colors.grey,
+                      ) 
+                    )
+                  ],
+                ),
+              ),
+              MaterialButton(
+                minWidth: 40,
+                onPressed: () {
+                  setState(() {
+                    _currentScreen = AboutUs();
+                    _currentIndex = 3;
+                  });
+                },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Icon(
+                      Icons.person, 
+                      color: _currentIndex == 3 ? Colors.blue : Colors.grey,
+                    ),
+                    Text(
+                      'About Us',
+                      style: TextStyle(
+                        color: _currentIndex == 3 ? Colors.blue : Colors.grey,
+                      ) 
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }
