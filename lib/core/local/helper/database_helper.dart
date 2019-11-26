@@ -85,8 +85,25 @@ class DatabaseHelper {
   }
 
   // function to update favorite
+  static Future<void> update(Favorite favorite) async {
+    Database db = await _database;
+    await db.update(
+      _tableName,
+      favorite.toMap(),
+      where: "$_id = ?",
+      whereArgs: [favorite.id]
+    );
+  }
 
   // function to delete favorite
+  static Future<void> delete(int id) async {
+    Database db = await _database;
+    await db.delete(
+      _tableName,
+      where: "$_id = ?",
+      whereArgs: [id]
+    );
+  }
 
 }
       

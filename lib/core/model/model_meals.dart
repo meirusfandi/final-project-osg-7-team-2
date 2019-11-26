@@ -10,7 +10,7 @@ class ModelMeals {
   });
 
   factory ModelMeals.fromJson(Map<String, dynamic> json) => ModelMeals(
-    meals: List<Meals>.from(json["categories"].map((x) => Meals.fromJSON((x))))
+    meals: List<Meals>.from(json["meals"].map((x) => Meals.fromJSON((x))))
   );
 }
 
@@ -67,4 +67,5 @@ class Meals {
     json["strMeasure19"] + " \t" +json["strIngredient19"] + "\n"+ 
     json["strMeasure20"] + " \t" +json["strIngredient20"] + "\n"
   );
+
 }

@@ -1,3 +1,4 @@
+import 'package:final_project_osg7/core/model/model_list_meals.dart';
 import 'package:final_project_osg7/core/model/model_meals.dart';
 import 'package:final_project_osg7/core/network/service_meals.dart';
 import 'package:flutter/material.dart';
@@ -23,11 +24,11 @@ class _MealsState extends State<ListMeals> {
   // to swipe / pull refresh
   final GlobalKey<RefreshIndicatorState> _refreshKey = GlobalKey<RefreshIndicatorState>();
 
-  Meals meals = Meals();
+  ListMeals meals = ListMeals();
 
   Future<Null> _refresh() {
     return _serviceMeals.getMeals(widget.category).then((_meals) {
-      setState(() => meals = _meals as Meals);
+      setState(() => meals = _meals as ListMeals);
     });
   }
 
@@ -40,7 +41,7 @@ class _MealsState extends State<ListMeals> {
        body: RefreshIndicator(
          key: _refreshKey,
          onRefresh: _refresh,
-         child: FutureBuilder<ModelMeals>(
+         child: FutureBuilder<ModelListMeals>(
           future: _serviceMeals.getMeals(widget.category),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
@@ -53,49 +54,41 @@ class _MealsState extends State<ListMeals> {
                   itemBuilder: (context, index) {
                     var data = snapshot.data.meals[index];
                     return snapshot.data.meals == null
-                        ? Text("No categories found.")
+                        ? Text("No Meals found.")
                         : InkWell(
                       child: Card(
                         margin: const EdgeInsets.all(8.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        child: Stack(
                           children: <Widget>[
-                            Center(
-                              child: Image.network(
-                                  data.strMealsThumb
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                top: 8.0,
-                                left: 8.0,
-                                right: 8.0,
-                              ),
-                              child: Text(
-                                data.strMeals,
-                                style: TextStyle(
-                                  fontSize: 18.0,
-                                  fontWeight: FontWeight.bold,
+                            Container(
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.all(Radius.circular(4.0)),
+                                child: Image.network(
+                                  data.strMealsThumb,
+                                  fit: BoxFit.cover
                                 ),
-                                textAlign: TextAlign.center,
                               ),
                             ),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  left: 8.0,
-                                  right: 8.0,
-                                  bottom: 8.0
-                              ),
-                              child: Text(
-                                data.strMealsInstructions,
-                                style: TextStyle(
-                                  fontSize: 12.0,
+                            Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Container(
+                                height: 40,
+                                color: Colors.grey.withOpacity(0.7),
+                                width: MediaQuery.of(context).size.height,
+                                child: Center(
+                                  child: Text(
+                                    data.strMeals,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18.0
+                                    ),
+                                  ),
                                 ),
-                                maxLines: 3,
-                                textAlign: TextAlign.center,
                               ),
-                            ),
-                          ],
+                            )
+                          ]
                         ),
                       ),
                       onTap: () {
@@ -107,6 +100,8 @@ class _MealsState extends State<ListMeals> {
                     );
                   }
               );
+            } else {
+              return Text("${snapshot.error}");
             }
           },
         ),
