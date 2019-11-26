@@ -16,13 +16,13 @@ class _HomeScreenState extends State<HomeScreen> {
   // set properties
   int _currentIndex = 0;
   final List<Widget> _children = [
-        Dashboard(),
-        SearchMeals(),
-        AboutUs()
+        DashboardScreen(),
+        SearchMealsScreen(),
+        AboutUsScreen()
   ];
 
   // set default / active tab
-  Widget _currentScreen = Dashboard();
+  Widget _currentScreen = DashboardScreen();
   final PageStorageBucket _bucket = PageStorageBucket();
 
   @override
@@ -59,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 minWidth: 40,
                 onPressed: () {
                   setState(() {
-                    _currentScreen = Dashboard();
+                    _currentScreen = DashboardScreen();
                     _currentIndex = 0;
                   });
                 },
@@ -83,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 minWidth: 40,
                 onPressed: () {
                   setState(() {
-                    _currentScreen = SearchMeals();
+                    _currentScreen = SearchMealsScreen();
                     _currentIndex = 1;
                   });
                 },
@@ -108,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 onPressed: () {
                   showToast('Notifications Menu Not Available now !', duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
                   setState(() {
-                    _currentScreen = Notifications();
+                    _currentScreen = NotificationsScreen();
                     _currentIndex = 2;
                   });
                 },
@@ -132,7 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 minWidth: 40,
                 onPressed: () {
                   setState(() {
-                    _currentScreen = AboutUs();
+                    _currentScreen = AboutUsScreen();
                     _currentIndex = 3;
                   });
                 },

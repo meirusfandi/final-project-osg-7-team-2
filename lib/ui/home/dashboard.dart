@@ -4,14 +4,14 @@ import 'package:final_project_osg7/ui/list_meals/list_meals.dart';
 import 'package:flutter/material.dart';
 import 'package:toast/toast.dart';
 
-class Dashboard extends StatefulWidget {
-  Dashboard({Key key}) : super(key: key);
+class DashboardScreen extends StatefulWidget {
+  DashboardScreen({Key key}) : super(key: key);
 
   @override
   _DashboardState createState() => _DashboardState();
 }
 
-class _DashboardState extends State<Dashboard> {
+class _DashboardState extends State<DashboardScreen> {
 
   ServiceCategories _serviceCategories;
 
