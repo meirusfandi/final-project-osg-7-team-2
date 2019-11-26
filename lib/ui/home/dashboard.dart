@@ -1,6 +1,8 @@
 import 'package:final_project_osg7/core/model/model_categories.dart';
 import 'package:final_project_osg7/core/network/service_categories.dart';
+import 'package:final_project_osg7/ui/list_meals/list_meals.dart';
 import 'package:flutter/material.dart';
+import 'package:toast/toast.dart';
 
 class Dashboard extends StatefulWidget {
   Dashboard({Key key}) : super(key: key);
@@ -28,6 +30,8 @@ class _DashboardState extends State<Dashboard> {
       setState(() => category = _categories as Categories);
     });
   }
+  
+  String categoryName;
 
   @override
   Widget build(BuildContext context) {
@@ -96,6 +100,15 @@ class _DashboardState extends State<Dashboard> {
                           ],
                         ),
                       ),
+                      onTap: () {
+                        categoryName = data.strCategory;
+                        // showToast(categoryName + " clicked", duration: Toast.LENGTH_LONG, gravity: Toast.TOP);
+                        
+                        Route route = MaterialPageRoute(
+                          builder: (context) => ListMeals(category: categoryName)
+                        );
+                        Navigator.push(context, route);
+                      },
                     );
                   }
               );
@@ -104,5 +117,9 @@ class _DashboardState extends State<Dashboard> {
         ),
        ),
     );
+  }
+
+  void showToast(String msg, {int duration, int gravity}) {
+    Toast.show(msg, context, duration: duration, gravity: gravity);
   }
 }

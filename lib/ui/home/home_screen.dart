@@ -4,6 +4,7 @@ import 'package:final_project_osg7/ui/home/notifications.dart';
 import 'package:final_project_osg7/ui/home/search.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:toast/toast.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -38,8 +39,10 @@ class _HomeScreenState extends State<HomeScreen> {
           color: Colors.red,
           size: 32,
         ),
-        backgroundColor: Colors.lightBlue,
-        onPressed: (){},
+        backgroundColor: Colors.white,
+        onPressed: (){
+          showToast('Favorite Menu Not Available now !', duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
+        },
       ),
 
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -103,6 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
               MaterialButton(
                 minWidth: 40,
                 onPressed: () {
+                  showToast('Notifications Menu Not Available now !', duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
                   setState(() {
                     _currentScreen = Notifications();
                     _currentIndex = 2;
@@ -154,4 +158,9 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
+  void showToast(String msg, {int duration, int gravity}) {
+    Toast.show(msg, context, duration: duration, gravity: gravity);
+  }
+  
 }
