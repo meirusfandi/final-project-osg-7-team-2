@@ -112,6 +112,11 @@ class _DashboardState extends State<DashboardScreen> {
                     );
                   }
               );
+            } else {
+              return Align(
+                alignment: Alignment.center,
+                child: Text("${snapshot.error}"),
+              );
             }
           },
         ),

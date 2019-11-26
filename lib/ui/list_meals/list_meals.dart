@@ -101,7 +101,10 @@ class _MealsState extends State<ListMeals> {
                   }
               );
             } else {
-              return Text("${snapshot.error}");
+              return Align(
+                alignment: Alignment.center,
+                child: Text("${snapshot.error}"),
+              );
             }
           },
         ),

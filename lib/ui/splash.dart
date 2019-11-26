@@ -18,7 +18,7 @@ class _SplashScreen extends State<SplashScreen> {
     // create db
     DatabaseHelper.createDB();
 
-    Duration duration = Duration(seconds: 1);
+    Duration duration = Duration(seconds: 3);
 
     Route route = MaterialPageRoute(
       builder: (context) => HomeScreen()
@@ -32,8 +32,35 @@ class _SplashScreen extends State<SplashScreen> {
     );
 
     return Scaffold(
-       body: Center(
-         child: CircularProgressIndicator(),
+       body: Container(
+         child: Stack(
+          children: <Widget>[
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(32.0),
+                    child: Image.asset(
+                      'assets/image_splash_screen.png',
+                      width: double.infinity,
+                    ),
+                  ),
+                  CircularProgressIndicator(),
+                ],
+              )
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 50.0),
+                child: Text(
+                  'App Version 1.0.0'
+                )
+              ),
+            ),
+          ],
+        ),
        ),
     );
   }
