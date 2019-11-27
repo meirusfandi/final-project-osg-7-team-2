@@ -43,7 +43,7 @@ class _SplashScreen extends State<SplashScreen> {
                   Padding(
                     padding: const EdgeInsets.all(32.0),
                     child: Image.asset(
-                      'assets/background.jpg',
+                      'assets/splash.jpg',
                       width: double.infinity,
                     ),
                   ),
