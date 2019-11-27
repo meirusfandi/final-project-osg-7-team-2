@@ -1,5 +1,6 @@
 import 'package:final_project_osg7/ui/home/about_us.dart';
 import 'package:final_project_osg7/ui/home/dashboard.dart';
+import 'package:final_project_osg7/ui/home/favorite.dart';
 import 'package:final_project_osg7/ui/home/notifications.dart';
 import 'package:final_project_osg7/ui/home/search.dart';
 import 'package:flutter/cupertino.dart';
@@ -41,6 +42,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         backgroundColor: Colors.white,
         onPressed: (){
+          Route route = MaterialPageRoute(
+            builder: (context) => FavoriteScreen()
+          );
           showToast('Favorite Menu Not Available now !', duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
         },
       ),
