@@ -15,9 +15,27 @@ class _DashboardState extends State<DashboardScreen> {
 
   ServiceCategories _serviceCategories;
 
+  Future<ModelCategories> categories;
+
+  // Progress indicator widget to show loading.
+  Widget loadingView() => Center(
+    child: CircularProgressIndicator(
+      backgroundColor: Colors.red,
+    ),
+  );
+
+  // View to empty data message
+  Widget noDataView(String msg) => Center(
+    child: Text(
+      msg,
+      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
+    ),
+  );
+
   @override
   void initState() {
     _serviceCategories = ServiceCategories();
+    super.initState();
   }
   
   // to swipe / pull refresh
@@ -45,78 +63,100 @@ class _DashboardState extends State<DashboardScreen> {
          child: FutureBuilder<ModelCategories>(
           future: _serviceCategories.getCategories(),
           builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2
-                  ),
-                  physics: BouncingScrollPhysics(),
-                  itemCount: snapshot.data.categories.length,
-                  itemBuilder: (context, index) {
-                    var data = snapshot.data.categories[index];
-                    return snapshot.data.categories == null
-                        ? Text("No categories found.")
-                        : InkWell(
-                      child: Card(
-                        margin: const EdgeInsets.all(8.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            Center(
-                              child: Image.network(
-                                  data.strCategoryThumb
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                top: 8.0,
-                                left: 8.0,
-                                right: 8.0,
-                              ),
-                              child: Text(
-                                data.strCategory,
-                                style: TextStyle(
-                                  fontSize: 18.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  left: 8.0,
-                                  right: 8.0,
-                                  bottom: 8.0
-                              ),
-                              child: Text(
-                                data.strCategoryDescription,
-                                style: TextStyle(
-                                  fontSize: 12.0,
-                                ),
-                                maxLines: 3,
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                          ],
+            switch (snapshot.connectionState) {
+              case ConnectionState.waiting: {
+                return loadingView();
+              }
+              case ConnectionState.active: {
+                break;
+              }
+              case ConnectionState.done: {
+                if (snapshot.hasData) {
+                  if (snapshot.data.categories != null) {
+                    if (snapshot.data.categories.length > 0) {
+                      return GridView.builder(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2
                         ),
-                      ),
-                      onTap: () {
-                        categoryName = data.strCategory;
-                        // showToast(categoryName + " clicked", duration: Toast.LENGTH_LONG, gravity: Toast.TOP);
-                        
-                        Route route = MaterialPageRoute(
-                          builder: (context) => ListMeals(category: categoryName)
-                        );
-                        Navigator.push(context, route);
-                      },
+                        physics: BouncingScrollPhysics(),
+                        itemCount: snapshot.data.categories.length,
+                        itemBuilder: (context, index) {
+                          var data = snapshot.data.categories[index];
+                          return snapshot.data.categories == null
+                              ? Text("No categories found.")
+                              : InkWell(
+                            child: Card(
+                              margin: const EdgeInsets.all(8.0),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: <Widget>[
+                                  Center(
+                                    child: Image.network(
+                                        data.strCategoryThumb
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                      top: 8.0,
+                                      left: 8.0,
+                                      right: 8.0,
+                                    ),
+                                    child: Text(
+                                      data.strCategory,
+                                      style: TextStyle(
+                                        fontSize: 18.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        left: 8.0,
+                                        right: 8.0,
+                                        bottom: 8.0
+                                    ),
+                                    child: Text(
+                                      data.strCategoryDescription,
+                                      style: TextStyle(
+                                        fontSize: 12.0,
+                                      ),
+                                      maxLines: 3,
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            onTap: () {
+                              showToast(data.strCategory+" clicked");
+                              // categoryName = data.strCategory;
+                              
+                              // Route route = MaterialPageRoute(
+                              //   builder: (context) => ListMeals(category: categoryName)
+                              // );
+                              // Navigator.push(context, route);
+                            },
+                          );
+                        }
                     );
+                    } else {
+                      return noDataView('No data found.');
+                    }
+                  } else {
+                    return noDataView('No data found.');
                   }
-              );
-            } else {
-              return Align(
-                alignment: Alignment.center,
-                child: Text("${snapshot.error}"),
-              );
+                } else if (snapshot.hasError) {
+                  return noDataView('Something went wrong');
+                } else {
+                  return noDataView('Something went wrong');
+                }
+                break;
+              }
+
+              case ConnectionState.none: {
+                break;
+              }
             }
           },
         ),

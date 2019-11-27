@@ -106,7 +106,3 @@ class DatabaseHelper {
   }
 
 }
-      
-// String join(String path, String dbName) {
-
-// }

@@ -87,5 +87,4 @@ class ListCategoriesScreen extends StatelessWidget {
       ),
     );
   }
-
 }

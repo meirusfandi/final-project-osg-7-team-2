@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:final_project_osg7/core/model/model_categories.dart';
+import 'package:connectivity/connectivity.dart';
 
 class ServiceCategories {
   String categoriesUrl = 'https://www.themealdb.com/api/json/v1/1/categories.php';
@@ -19,5 +20,15 @@ class ServiceCategories {
     } catch (e) {
       print(e.toString());
     }
+  }
+
+  Future<bool> isConnected() async {
+    var connect = await (Connectivity().checkConnectivity());
+    if (connect == ConnectivityResult.mobile) {
+      return true;
+    } else if (connect == ConnectivityResult.wifi){
+      return true;
+    }
+    return false;
   }
 }
