@@ -14,6 +14,14 @@ class _AboutUsState extends State<AboutUsScreen> {
        appBar: AppBar(
          title: Text('About Us'),
        ),
+       body: SingleChildScrollView(
+         child: Column(
+           mainAxisSize: MainAxisSize.max,
+           children: <Widget>[
+             
+           ],
+         ),
+       ),
     );
   }
 }

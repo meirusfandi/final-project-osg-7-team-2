@@ -32,6 +32,7 @@ class _SplashScreen extends State<SplashScreen> {
     );
 
     return Scaffold(
+      backgroundColor: Colors.white,
        body: Container(
          child: Stack(
           children: <Widget>[
@@ -42,7 +43,7 @@ class _SplashScreen extends State<SplashScreen> {
                   Padding(
                     padding: const EdgeInsets.all(32.0),
                     child: Image.asset(
-                      'assets/image_splash_screen.png',
+                      'assets/background.jpg',
                       width: double.infinity,
                     ),
                   ),

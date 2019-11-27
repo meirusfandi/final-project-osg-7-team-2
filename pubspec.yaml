@@ -49,6 +49,9 @@ flutter:
 
   assets:
     - assets/image_splash_screen.png
+    - assets/background.jpg
+    - assets/resto.jpg
+    - assets/vegetables.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
