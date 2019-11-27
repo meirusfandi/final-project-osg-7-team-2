@@ -32,46 +32,60 @@ class _FavoriteState extends State<FavoriteScreen> {
     super.initState();
   }
 
+  // View to empty data message
+  Widget noDataView(String msg) => Center(
+    child: Text(
+      msg,
+      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
+    ),
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: AppBar(
-         title: Text('Favorite Meals'),
-       ),
-       body: ListView.separated(
-         itemCount: _listData.length,
-         itemBuilder: (BuildContext context, int index) {
-           return ListTile(
-             leading: Image.network(
-               _listData[index].strMealsThumb
-             ),
-             title: Text(
-               _listData[index].strMeals,
-               style: TextStyle(
-                 color: Colors.black,
-                 fontSize: 20,
-                 fontWeight: FontWeight.bold
-               ),
-               maxLines: 1,
-             ),
-             subtitle: Text(
-               _listData[index].strMealsInstructions,
-               style: TextStyle(
-                 color: Colors.black,
-                 fontSize: 14,
-                 fontWeight: FontWeight.bold
-               ),
-               maxLines: 3,
-             ),
-             onTap: (){
-               showToast(_listData[index].strMeals+" clicked");
-             },
-           );
-         },
-         separatorBuilder: (BuildContext context, int index) {
-           return Divider();
-         },
-       )
+      appBar: AppBar(
+        title: Text('Favorite Meals'),
+      ),
+      body: ListView.separated(
+        itemCount: _listData.length,
+        itemBuilder: (BuildContext context, int index) {
+          if (_listData != null) {
+            return noDataView("Favorite value is null");
+          } else if (_listData.length > 0) {
+            return ListTile(
+              leading: Image.network(
+                _listData[index].strMealsThumb
+              ),
+              title: Text(
+                _listData[index].strMeals,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold
+                ),
+                maxLines: 1,
+              ),
+              subtitle: Text(
+                _listData[index].strMealsInstructions,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold
+                ),
+                maxLines: 3,
+              ),
+              onTap: (){
+                showToast(_listData[index].strMeals+" clicked");
+              },
+            );
+          } else {
+            return noDataView("Favorite data not found.");
+          }
+        },
+        separatorBuilder: (BuildContext context, int index) {
+          return Divider();
+        },
+      )
     );
   }
 

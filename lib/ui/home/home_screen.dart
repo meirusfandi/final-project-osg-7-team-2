@@ -45,7 +45,8 @@ class _HomeScreenState extends State<HomeScreen> {
           Route route = MaterialPageRoute(
             builder: (context) => FavoriteScreen()
           );
-          showToast('Favorite Menu Not Available now !', duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
+          Navigator.push(context, route);
+          // showToast('Favorite Menu Not Available now !', duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
         },
       ),
 
