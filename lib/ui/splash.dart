@@ -38,6 +38,7 @@ class _SplashScreen extends State<SplashScreen> {
             Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.all(32.0),
@@ -46,7 +47,12 @@ class _SplashScreen extends State<SplashScreen> {
                       width: double.infinity,
                     ),
                   ),
-                  CircularProgressIndicator(),
+                  CircularProgressIndicator(
+                    backgroundColor: Colors.red,
+                  ),
+                  Text(
+                    'Please wait...'
+                  )
                 ],
               )
             ),
