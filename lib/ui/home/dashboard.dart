@@ -129,13 +129,12 @@ class _DashboardState extends State<DashboardScreen> {
                               ),
                             ),
                             onTap: () {
-                              showToast(data.strCategory+" clicked");
-                              // categoryName = data.strCategory;
+                              categoryName = data.strCategory;
                               
-                              // Route route = MaterialPageRoute(
-                              //   builder: (context) => ListMeals(category: categoryName)
-                              // );
-                              // Navigator.push(context, route);
+                              Route route = MaterialPageRoute(
+                                builder: (context) => ListMeals(category: categoryName)
+                              );
+                              Navigator.push(context, route);
                             },
                           );
                         }
