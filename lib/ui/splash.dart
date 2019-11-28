@@ -48,7 +48,13 @@ class _SplashScreen extends State<SplashScreen> {
                       width: double.infinity,
                     ),
                   ),
-                  CircularProgressIndicator(),
+                  CircularProgressIndicator(
+                    backgroundColor: Colors.red,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text('Please wait...'),
+                  )
                 ],
               )
             ),

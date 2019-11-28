@@ -1,6 +1,7 @@
 import 'package:final_project_osg7/core/model/model_list_meals.dart';
 import 'package:final_project_osg7/core/model/model_meals.dart';
 import 'package:final_project_osg7/core/network/service_meals.dart';
+import 'package:final_project_osg7/ui/detail_meals/detail_meals.dart';
 import 'package:flutter/material.dart';
 
 class ListMeals extends StatefulWidget {
@@ -23,9 +24,18 @@ class _MealsState extends State<ListMeals> {
 
   // Progress indicator widget to show loading.
   Widget loadingView() => Center(
-    child: CircularProgressIndicator(
-      backgroundColor: Colors.red,
-    ),
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        CircularProgressIndicator(
+          backgroundColor: Colors.red,
+        ),
+        Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text('Loading...'),
+        )
+      ],
+    )
   );
 
   // View to empty data message
@@ -46,6 +56,9 @@ class _MealsState extends State<ListMeals> {
       setState(() => meals = _meals as ListMeals);
     });
   }
+
+  String idMeals;
+  String strMeals;
 
   @override
   Widget build(BuildContext context) {
@@ -115,10 +128,13 @@ class _MealsState extends State<ListMeals> {
                             ),
                           ),
                           onTap: () {
-                            // Route route = MaterialPageRoute(
-                            //   builder: (context) => ListMeals()
-                            // );
-                            // Navigator.push(context, route);
+                            idMeals = data.idMeals;
+                            strMeals = data.strMeals;
+
+                            Route route = MaterialPageRoute(
+                              builder: (context) => DetailScreen(idMeals: idMeals, strMeals: strMeals)
+                            );
+                            Navigator.push(context, route);
                           },
                         );
                       }

@@ -19,9 +19,18 @@ class _DashboardState extends State<DashboardScreen> {
 
   // Progress indicator widget to show loading.
   Widget loadingView() => Center(
-    child: CircularProgressIndicator(
-      backgroundColor: Colors.red,
-    ),
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        CircularProgressIndicator(
+          backgroundColor: Colors.red,
+        ),
+        Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text('Loading...'),
+        )
+      ],
+    )
   );
 
   // View to empty data message
