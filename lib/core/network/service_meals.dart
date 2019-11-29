@@ -12,7 +12,7 @@ class ServiceMeals {
       if (response.statusCode == 200) {
         Map json = jsonDecode(response.body);
 
-        print(json);
+        // print(json);
 
         ModelListMeals modelMeals = ModelListMeals.fromJSON(json);
         return modelMeals;

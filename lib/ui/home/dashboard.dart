@@ -9,6 +9,7 @@ class DashboardScreen extends StatefulWidget {
 
   @override
   _DashboardState createState() => _DashboardState();
+  
 }
 
 class _DashboardState extends State<DashboardScreen> {
@@ -141,7 +142,7 @@ class _DashboardState extends State<DashboardScreen> {
                               categoryName = data.strCategory;
                               
                               Route route = MaterialPageRoute(
-                                builder: (context) => ListMeals(category: categoryName)
+                                builder: (context) => ListMealsScreen(category: categoryName)
                               );
                               Navigator.push(context, route);
                             },
@@ -163,7 +164,7 @@ class _DashboardState extends State<DashboardScreen> {
               }
 
               case ConnectionState.none: {
-                break;
+                return noDataView('Connection not established. Please try again later.');
               }
             }
           },

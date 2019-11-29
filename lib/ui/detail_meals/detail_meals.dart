@@ -38,19 +38,19 @@ class _DetailScreenState extends State<DetailScreen> {
   );
 
   ServiceDetails _serviceDetails;
+
+  Future<ModelMeals> models;
   @override
   void initState() {
     _serviceDetails = ServiceDetails();
+    models = _serviceDetails.getDetails(widget.idMeals);
     super.initState();
   }
+
+  Meals meals = Meals();
   
   // to swipe / pull refresh
   final GlobalKey<RefreshIndicatorState> _refreshKey = GlobalKey<RefreshIndicatorState>();
-
-  Meals meals = Meals();
-
-  String idMeals;
-  String strMeals;
 
   Future<Null> _refresh() {
     return _serviceDetails.getDetails(widget.idMeals).then((_meals) {
@@ -61,11 +61,48 @@ class _DetailScreenState extends State<DetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: AppBar(
-         title: Text(
-           widget.strMeals
-         ),
-       ),
+      appBar: AppBar(
+        title: Text(
+          widget.strMeals
+        ),
+      ),
+      body: RefreshIndicator(
+        key: _refreshKey,
+        onRefresh: _refresh,
+        child: FutureBuilder<ModelMeals>(
+          future: models,
+          builder: (context, snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.active: {
+                return noDataView('koneksi bagus padahal');
+              }
+              case ConnectionState.done: {
+                // print('this is snapshot $snapshot');
+                // print(snapshot.data);
+                if (snapshot.hasData) {
+                  // return Center(
+                  //   child: Text(
+                  //     snapshot.data.meals.strMeals,
+                  //   ),
+                  // );
+                  return noDataView('error cuy');
+                } else if (snapshot.hasError) {
+                  return noDataView('Something went wrong.');
+                } else {
+                  return noDataView('ini apa lagi');
+                }
+                break;
+              }
+              case ConnectionState.waiting: {
+                return loadingView();
+              }
+              case ConnectionState.none: {
+                return noDataView('Connection not established. Please try again later.');
+              }
+            }
+          },
+        ),
+      ),
     );
   }
 }

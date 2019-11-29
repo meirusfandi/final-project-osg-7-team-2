@@ -129,7 +129,7 @@ class _SearchMealsState extends State<SearchMealsScreen> {
               if (this.actionIcon.icon == Icons.search) {
                 this.actionIcon = new Icon(Icons.close, color: Colors.white,);
                 this.appBarTitle = new TextField(
-                  controller: _searchQuery,
+                  // controller: _searchQuery,
                   style: new TextStyle(
                     color: Colors.white,
 

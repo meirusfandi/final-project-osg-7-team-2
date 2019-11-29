@@ -3,16 +3,16 @@ import 'package:final_project_osg7/core/network/service_meals.dart';
 import 'package:final_project_osg7/ui/detail_meals/detail_meals.dart';
 import 'package:flutter/material.dart';
 
-class ListMeals extends StatefulWidget {
+class ListMealsScreen extends StatefulWidget {
   final String category;
 
-  ListMeals({Key key, this.category}) : super(key: key);
+  ListMealsScreen({Key key, this.category}) : super(key: key);
   
   @override
   _MealsState createState() => _MealsState();
 }
 
-class _MealsState extends State<ListMeals> {
+class _MealsState extends State<ListMealsScreen> {
 
   ServiceMeals _serviceMeals;
 
