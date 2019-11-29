@@ -1,5 +1,4 @@
 import 'package:final_project_osg7/core/model/model_list_meals.dart';
-import 'package:final_project_osg7/core/model/model_meals.dart';
 import 'package:final_project_osg7/core/network/service_meals.dart';
 import 'package:final_project_osg7/ui/detail_meals/detail_meals.dart';
 import 'package:flutter/material.dart';
