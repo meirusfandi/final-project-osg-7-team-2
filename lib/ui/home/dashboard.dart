@@ -28,7 +28,9 @@ class _DashboardState extends State<DashboardScreen> {
         ),
         Padding(
           padding: EdgeInsets.all(8.0),
-          child: Text('Loading...'),
+          child: Text(
+            'Loading...'
+          ),
         )
       ],
     )

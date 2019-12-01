@@ -8,7 +8,11 @@ Aplikasi Flutter daftar makanan (Tugas Akhir - OSG07) Team 2 dengan fitur :
 - menu (drawer / bottom navigation)
 
 ### Screenshot
-![ESPN Mobile App](https://cdn.vox-cdn.com/thumbor/5ZRASaKMcOSnBZ8FxORHlSIjX8k=/12x0:1237x817/920x613/filters:focal(12x0:1237x817):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/47789201/iPhone_Screenshot.0.0.jpg "source: theverge.com")
+![ESPN Mobile App](http://res.meirusfandi.com/assets/images/eudeka/final/list_categories.jpg)
+![ESPN Mobile App](http://res.meirusfandi.com/assets/images/eudeka/final/list_meals.jpg)
+![ESPN Mobile App](http://res.meirusfandi.com/assets/images/eudeka/final/detail_meals.jpg)
+![ESPN Mobile App](http://res.meirusfandi.com/assets/images/eudeka/final/about_us.jpg)
+![ESPN Mobile App](http://res.meirusfandi.com/assets/images/eudeka/final/about_us_2.jpg)
 
 ### Built With
 - [Flutter](https://flutter.dev)

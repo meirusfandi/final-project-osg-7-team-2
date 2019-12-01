@@ -51,9 +51,14 @@ class _SplashScreen extends State<SplashScreen> {
                   CircularProgressIndicator(
                     backgroundColor: Colors.red,
                   ),
+<<<<<<< HEAD
                   Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Text('Please wait...'),
+=======
+                  Text(
+                    'Please wait...'
+>>>>>>> 26a0200ac336ffbbdfe03b077aaaf2aa49a1e72d
                   )
                 ],
               )
