@@ -9,7 +9,6 @@ class Favorite {
   String strMealsInstructions;
   String strMealsThumb;
   String strTags;
-  String strIngredients;
 
   Favorite({
     this.id,
@@ -20,7 +19,6 @@ class Favorite {
     this.strMealsInstructions,
     this.strMealsThumb,
     this.strTags,
-    this.strIngredients
   });
 
   Map<String, dynamic> toMap() {
@@ -32,8 +30,7 @@ class Favorite {
       "mealsArea" : strArea,
       "mealsInstructions" : strMealsInstructions,
       "mealsThumb" : strMealsThumb,
-      "mealsTags" : strTags,
-      "mealsIngredients" : strIngredients
+      "mealsTags" : strTags
     };
   }
 }

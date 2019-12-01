@@ -21,14 +21,4 @@ class ServiceCategories {
       print(e.toString());
     }
   }
-
-  Future<bool> isConnected() async {
-    var connect = await (Connectivity().checkConnectivity());
-    if (connect == ConnectivityResult.mobile) {
-      return true;
-    } else if (connect == ConnectivityResult.wifi){
-      return true;
-    }
-    return false;
-  }
 }

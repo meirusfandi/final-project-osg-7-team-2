@@ -32,6 +32,7 @@ class _SplashScreen extends State<SplashScreen> {
     );
 
     return Scaffold(
+      backgroundColor: Colors.white,
        body: Container(
          child: Stack(
           children: <Widget>[
@@ -43,15 +44,16 @@ class _SplashScreen extends State<SplashScreen> {
                   Padding(
                     padding: const EdgeInsets.all(32.0),
                     child: Image.asset(
-                      'assets/image_splash_screen.png',
+                      'assets/splash.jpg',
                       width: double.infinity,
                     ),
                   ),
                   CircularProgressIndicator(
                     backgroundColor: Colors.red,
                   ),
-                  Text(
-                    'Please wait...'
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text('Please wait...'),
                   )
                 ],
               )

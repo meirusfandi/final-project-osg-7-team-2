@@ -19,6 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> _children = [
         DashboardScreen(),
         SearchMealsScreen(),
+        FavoriteScreen(),
         AboutUsScreen()
   ];
 
@@ -33,24 +34,6 @@ class _HomeScreenState extends State<HomeScreen> {
         bucket: _bucket,
         child: _currentScreen,
       ),
-
-      floatingActionButton: FloatingActionButton(
-        child: Icon(
-          Icons.favorite,
-          color: Colors.red,
-          size: 32,
-        ),
-        backgroundColor: Colors.white,
-        onPressed: (){
-          Route route = MaterialPageRoute(
-            builder: (context) => FavoriteScreen()
-          );
-          Navigator.push(context, route);
-          // showToast('Favorite Menu Not Available now !', duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
-        },
-      ),
-
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
 
       // bottom navigation bar
       bottomNavigationBar: BottomAppBar(
@@ -97,12 +80,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: <Widget>[
                     Icon(
                       Icons.search, 
-                      color: _currentIndex == 1 ? Colors.blue : Colors.grey,
+                      color: _currentIndex == 1 ? Colors.green : Colors.grey,
                     ),
                     Text(
-                      'Search Meals',
+                      'Search',
                       style: TextStyle(
-                        color: _currentIndex == 1 ? Colors.blue : Colors.grey,
+                        color: _currentIndex == 1 ? Colors.green : Colors.grey,
                       ) 
                     )
                   ],
@@ -111,9 +94,9 @@ class _HomeScreenState extends State<HomeScreen> {
               MaterialButton(
                 minWidth: 40,
                 onPressed: () {
-                  showToast('Notifications Menu Not Available now !', duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
+                  showToast('Favorite Menu Not Available now !', duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
                   setState(() {
-                    _currentScreen = NotificationsScreen();
+                    _currentScreen = FavoriteScreen();
                     _currentIndex = 2;
                   });
                 },
@@ -121,13 +104,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Icon(
-                      Icons.notifications, 
-                      color: _currentIndex == 2 ? Colors.blue : Colors.grey,
+                      Icons.favorite,
+                      color: _currentIndex == 2 ? Colors.red : Colors.grey,
+                      size: 32,
                     ),
                     Text(
-                      'Notifications',
+                      'Favorite',
                       style: TextStyle(
-                        color: _currentIndex == 2 ? Colors.blue : Colors.grey,
+                        color: _currentIndex == 2 ? Colors.red : Colors.grey,
                       ) 
                     )
                   ],
@@ -146,12 +130,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: <Widget>[
                     Icon(
                       Icons.person, 
-                      color: _currentIndex == 3 ? Colors.blue : Colors.grey,
+                      color: _currentIndex == 3 ? Colors.yellow : Colors.grey,
                     ),
                     Text(
                       'About Us',
                       style: TextStyle(
-                        color: _currentIndex == 3 ? Colors.blue : Colors.grey,
+                        color: _currentIndex == 3 ? Colors.yellow : Colors.grey,
                       ) 
                     )
                   ],
