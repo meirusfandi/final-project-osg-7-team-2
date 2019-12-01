@@ -96,7 +96,7 @@ class _DashboardState extends State<DashboardScreen> {
                               ? Text("No categories found.")
                               : InkWell(
                             child: Card(
-                              margin: const EdgeInsets.all(8.0),
+                              margin: const EdgeInsets.all(4.0),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: <Widget>[
@@ -114,7 +114,7 @@ class _DashboardState extends State<DashboardScreen> {
                                     child: Text(
                                       data.strCategory,
                                       style: TextStyle(
-                                        fontSize: 18.0,
+                                        fontSize: 16.0,
                                         fontWeight: FontWeight.bold,
                                       ),
                                       textAlign: TextAlign.center,
@@ -131,7 +131,7 @@ class _DashboardState extends State<DashboardScreen> {
                                       style: TextStyle(
                                         fontSize: 12.0,
                                       ),
-                                      maxLines: 3,
+                                      maxLines: 2,
                                       textAlign: TextAlign.center,
                                     ),
                                   ),
@@ -173,7 +173,4 @@ class _DashboardState extends State<DashboardScreen> {
     );
   }
 
-  void showToast(String msg, {int duration, int gravity}) {
-    Toast.show(msg, context, duration: duration, gravity: gravity);
-  }
 }

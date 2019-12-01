@@ -100,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: _currentIndex == 1 ? Colors.blue : Colors.grey,
                     ),
                     Text(
-                      'Search Meals',
+                      'Search',
                       style: TextStyle(
                         color: _currentIndex == 1 ? Colors.blue : Colors.grey,
                       ) 

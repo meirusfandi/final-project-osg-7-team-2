@@ -56,8 +56,8 @@ class _MealsState extends State<ListMealsScreen> {
     });
   }
 
-  String idMeals;
-  String strMeals;
+  String mealsId;
+  String mealsName;
 
   @override
   Widget build(BuildContext context) {
@@ -119,6 +119,7 @@ class _MealsState extends State<ListMealsScreen> {
                                           fontWeight: FontWeight.bold,
                                           fontSize: 18.0
                                         ),
+                                        maxLines: 1,
                                       ),
                                     ),
                                   ),
@@ -127,11 +128,11 @@ class _MealsState extends State<ListMealsScreen> {
                             ),
                           ),
                           onTap: () {
-                            idMeals = data.idMeals;
-                            strMeals = data.strMeals;
+                            mealsId = data.idMeals;
+                            mealsName = data.strMeals;
 
                             Route route = MaterialPageRoute(
-                              builder: (context) => DetailScreen(idMeals: idMeals, strMeals: strMeals)
+                              builder: (context) => DetailScreen(idMeals: mealsId, strMeals: mealsName)
                             );
                             Navigator.push(context, route);
                           },

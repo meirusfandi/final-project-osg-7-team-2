@@ -46,18 +46,18 @@ class _SearchMealsState extends State<SearchMealsScreen> {
     });
   }
   
-  ServiceSearch _serviceSearch;
+  // ServiceSearch _serviceSearch;
 
   void init() {
-    _serviceSearch.getSearchMeals(_searchText).then((meals) {
-      setState(() => _meals = meals as Meals);
-    });
+    // _serviceSearch.getSearchMeals(_searchText).then((meals) {
+    //   setState(() => _meals = meals as Meals);
+    // });
   }
 
   Future<Null> _refresh() {
-    return _serviceSearch.getSearchMeals(_searchText).then((meals) {
-      setState(() => _meals = meals as Meals);
-    });
+    // return _serviceSearch.getSearchMeals(_searchText).then((meals) {
+    //   setState(() => _meals = meals as Meals);
+    // });
   }
 
     // Progress indicator widget to show loading.
@@ -91,7 +91,7 @@ class _SearchMealsState extends State<SearchMealsScreen> {
 
   @override
   void initState() { 
-    _serviceSearch = ServiceSearch();
+    // _serviceSearch = ServiceSearch();
     super.initState();
   }
 

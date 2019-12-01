@@ -1,6 +1,7 @@
 import 'package:final_project_osg7/core/model/model_meals.dart';
 import 'package:final_project_osg7/core/network/service_details.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class DetailScreen extends StatefulWidget {
   String idMeals;
@@ -37,24 +38,24 @@ class _DetailScreenState extends State<DetailScreen> {
     ),
   );
 
-  ServiceDetails _serviceDetails;
+  ServiceDetails serviceDetails;
+  Future<ModelMeals> meals;
 
-  Future<ModelMeals> models;
   @override
   void initState() {
-    _serviceDetails = ServiceDetails();
-    models = _serviceDetails.getDetails(widget.idMeals);
+    serviceDetails = ServiceDetails();
+    meals = serviceDetails.getDetails(widget.idMeals);
     super.initState();
   }
-
-  Meals meals = Meals();
   
   // to swipe / pull refresh
-  final GlobalKey<RefreshIndicatorState> _refreshKey = GlobalKey<RefreshIndicatorState>();
+  final GlobalKey<RefreshIndicatorState> refreshKey = GlobalKey<RefreshIndicatorState>();
 
-  Future<Null> _refresh() {
-    return _serviceDetails.getDetails(widget.idMeals).then((_meals) {
-      setState(() => meals = _meals as Meals);
+  Meals meal = Meals();
+
+  Future<Null> refresh() {
+    return serviceDetails.getDetails(widget.idMeals).then((_meals) {
+      setState(() => meal = _meals as Meals);
     });
   }
 
@@ -67,42 +68,213 @@ class _DetailScreenState extends State<DetailScreen> {
         ),
       ),
       body: RefreshIndicator(
-        key: _refreshKey,
-        onRefresh: _refresh,
+        key: refreshKey,
+        onRefresh: refresh,
         child: FutureBuilder<ModelMeals>(
-          future: models,
+          future: serviceDetails.getDetails(widget.idMeals),
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
-              case ConnectionState.active: {
-                return noDataView('koneksi bagus padahal');
-              }
-              case ConnectionState.done: {
-                // print('this is snapshot $snapshot');
-                // print(snapshot.data);
-                if (snapshot.hasData) {
-                  // return Center(
-                  //   child: Text(
-                  //     snapshot.data.meals.strMeals,
-                  //   ),
-                  // );
-                  return noDataView('error cuy');
-                } else if (snapshot.hasError) {
-                  return noDataView('Something went wrong.');
-                } else {
-                  return noDataView('ini apa lagi');
-                }
-                break;
-              }
               case ConnectionState.waiting: {
                 return loadingView();
               }
+              case ConnectionState.active: {
+                break;
+              }
               case ConnectionState.none: {
-                return noDataView('Connection not established. Please try again later.');
+                return noDataView('Something went wrong');
+              }
+              case ConnectionState.done: {
+                if (snapshot.hasData) {
+                  if (snapshot.data.meals != null) {
+                    if (snapshot.data.meals.length == 1) {
+                      var mealData = snapshot.data.meals[0];
+                      return SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          // mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            Stack(
+                              alignment: Alignment.bottomCenter,
+                              children: <Widget>[
+                                Container(
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.all(Radius.circular(4.0)),
+                                    child: Image.network(
+                                      mealData.strMealsThumb,
+                                      fit: BoxFit.fill,
+                                      width: MediaQuery.of(context).size.width,
+                                      height: 300,
+                                    ),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: Container(
+                                    color: Colors.grey.withOpacity(0.7),
+                                    width: MediaQuery.of(context).size.height,
+                                    height: 60,
+                                    child: Center(
+                                      child: Text(
+                                        mealData.strMeals,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 28.0
+                                        ),
+                                        maxLines: 1,
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Row(
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.place,
+                                    size: 20,
+                                    color: Colors.blue,
+                                  ),
+                                  Text(
+                                    mealData.strArea,
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                    ),
+                                    textAlign: TextAlign.left,
+                                  ),
+                                ],
+                              )
+                            ),
+                            
+                            Padding(
+                              padding: EdgeInsets.only(
+                                left: 8.0,
+                                bottom: 8.0
+                              ),
+                              child: Row(
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.category,
+                                    color: Colors.blue,
+                                    size: 20,
+                                  ),
+                                  Text(
+                                    mealData.strCategory,
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                    ),
+                                    textAlign: TextAlign.left,
+                                  ),
+                                ],
+                              ),
+                            ),
+
+                            Padding(
+                              padding: EdgeInsets.only(
+                                left: 8.0,
+                                bottom: 8.0
+                              ),
+                              child: Row(
+                                children: <Widget>[
+                                  Icon(
+                                    FontAwesomeIcons.tag,
+                                    size: 20,
+                                    color: Colors.blue,
+                                  ),
+                                  Text(
+                                    mealData.strTags,
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                    ),
+                                    textAlign: TextAlign.left,
+                                  ),
+                                ],
+                              ),
+                            ),
+
+                            Divider(),
+
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: <Widget>[
+                                Column(
+                                  children: <Widget>[
+                                    Icon(
+                                      Icons.favorite,
+                                      color: Colors.red,
+                                      size: 32,
+                                    ),
+                                    Text(
+                                      '100K'
+                                    )
+                                  ],
+                                ),
+                                Column(
+                                  children: <Widget>[
+                                    Icon(
+                                      Icons.share,
+                                      color: Colors.blue,
+                                      size: 32,
+                                    ),
+                                    Text(
+                                      '50K'
+                                    )
+                                  ],
+                                ),
+                                Column(
+                                  children: <Widget>[
+                                    Icon(
+                                      Icons.comment,
+                                      color: Colors.green,
+                                      size: 32,
+                                    ),
+                                    Text(
+                                      '10M'
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
+
+                            Divider(),
+
+                            Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text(
+                                mealData.strMealsInstructions,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                )
+                              ),
+                            )
+                          ],
+                        ),
+                      );
+                    } else {
+                      return noDataView('Data not found or data is list.');
+                    }
+                  } else {
+                    return noDataView('No data found.');
+                  }
+                } else if (snapshot.hasError){
+                  return Container(child: Text(snapshot.error));
+                } else {
+                  return noDataView('No data and no error');
+                }
+                break;
+              }
+              default: {
+                return noDataView('Something went wrong!');
               }
             }
           },
         ),
-      ),
+      )
     );
   }
 }
