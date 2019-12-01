@@ -20,7 +20,6 @@ class DatabaseHelper {
   static final String _strMealsInstructions = "mealsInstructions";
   static final String _strMealsThumb = "mealsThumb";
   static final String _strTags = "mealsTags";
-  static final String _strIngredients = "mealsIngredients";
 
   // function to create and open database
   static void createDB() async {
@@ -36,8 +35,7 @@ class DatabaseHelper {
           "$_strArea TEXT,"
           "$_strMealsInstructions TEXT,"
           "$_strMealsThumb TEXT,"
-          "$_strTags TEXT,"
-          "$_strIngredients TEXT"
+          "$_strTags TEXT"
           ")"
         );
       },
@@ -75,9 +73,31 @@ class DatabaseHelper {
             strMealsInstructions: favorites[index][_strMealsInstructions],
             strMealsThumb: favorites[index][_strMealsThumb],
             strTags: favorites[index][_strTags],
-            strIngredients: favorites[index][_strIngredients],
           );
         },
+      );
+    } else {
+      return null;
+    }
+  }
+
+  static Future<Favorite> getDataById(String idMeals) async {
+    Database db = await _database;
+    List<Map<String, dynamic>> maps = await db.query(
+      _tableName,
+      where: "$_idMeals = ?",
+      whereArgs: [idMeals]
+    );
+    if (maps.length == 1) {
+      return Favorite(
+        id: maps[0][_id],
+        idMeals: maps[0][_idMeals],
+        strMeals: maps[0][_strMeals],
+        strArea: maps[0][_strArea],
+        strCategory: maps[0][_strCategory],
+        strMealsInstructions: maps[0][_strMealsInstructions],
+        strMealsThumb: maps[0][_strMealsThumb],
+        strTags: maps[0][_strTags],
       );
     } else {
       return null;

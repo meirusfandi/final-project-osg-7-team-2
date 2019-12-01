@@ -1,7 +1,9 @@
+import 'package:final_project_osg7/core/model/model_list_meals.dart';
 import 'package:final_project_osg7/core/model/model_meals.dart';
 import 'package:final_project_osg7/core/network/service_search.dart';
 import 'package:final_project_osg7/ui/detail_meals/detail_meals.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 class SearchMealsScreen extends StatefulWidget {
   SearchMealsScreen({Key key}) : super(key: key);
@@ -12,53 +14,23 @@ class SearchMealsScreen extends StatefulWidget {
 
 class _SearchMealsState extends State<SearchMealsScreen> {
 
-  Widget appBarTitle = Text(
-    'Search Meals ...', 
-    style: TextStyle(
-      color: Colors.white
-    ),
-  );
-
-  Icon actionIcon = Icon(
-    Icons.search, 
-    color: Colors.white
-  );
-
-  final key = GlobalKey<ScaffoldState>();
   final TextEditingController _serachQuery = TextEditingController();
-  Meals _meals;
-  bool _isSearching;
-  String _searchText = "";
-
-  _SearchMealsState() {
-    _serachQuery.addListener(() {
-      if (_serachQuery.text.isEmpty) {
-        setState(() {
-          _isSearching = false;
-          _searchText = "";
-        });
-      } else {
-        setState(() {
-          _isSearching = true;
-          _searchText = _serachQuery.text;
-        });
-      }
-    });
-  }
   
-  // ServiceSearch _serviceSearch;
+  ServiceSearch _serviceSearch;
 
-  void init() {
-    // _serviceSearch.getSearchMeals(_searchText).then((meals) {
-    //   setState(() => _meals = meals as Meals);
-    // });
-  }
+  ListMeals _meals;
 
-  Future<Null> _refresh() {
-    // return _serviceSearch.getSearchMeals(_searchText).then((meals) {
-    //   setState(() => _meals = meals as Meals);
-    // });
-  }
+  // void init() {
+  //   _serviceSearch.getSearchMeals(_searchText).then((meals) {
+  //     setState(() => _meals = meals as ListMeals);
+  //   });
+  // }
+
+  // Future<Null> _refresh() {
+  //   return _serviceSearch.getSearchMeals(_searchText).then((meals) {
+  //     setState(() => _meals = meals as ListMeals);
+  //   });
+  // }
 
     // Progress indicator widget to show loading.
   Widget loadingView() => Center(
@@ -95,137 +67,66 @@ class _SearchMealsState extends State<SearchMealsScreen> {
     super.initState();
   }
 
-  void _handleSearchStart() {
-    setState(() {
-      _isSearching = true;
-    });
-  }
-
-  void _handleSearchEnd() {
-    setState(() {
-      this.actionIcon = Icon(
-        Icons.search, 
-        color: Colors.white
-      );
-
-      this.appBarTitle = Text(
-        'Search Meals ...',
-        style: TextStyle(
-          color: Colors.white
-        ),
-      );
-      _isSearching = true;
-      _serachQuery.clear();
-    });
-  }
-
-  Widget buildBar(BuildContext context) {
-    return new AppBar(
-        centerTitle: true,
-        title: appBarTitle,
-        actions: <Widget>[
-          new IconButton(icon: actionIcon, onPressed: () {
-            setState(() {
-              if (this.actionIcon.icon == Icons.search) {
-                this.actionIcon = new Icon(Icons.close, color: Colors.white,);
-                this.appBarTitle = new TextField(
-                  // controller: _searchQuery,
-                  style: new TextStyle(
-                    color: Colors.white,
-
-                  ),
-                  decoration: new InputDecoration(
-                      prefixIcon: new Icon(Icons.search, color: Colors.white),
-                      hintText: "Search...",
-                      hintStyle: new TextStyle(color: Colors.white)
-                  ),
-                );
-                _handleSearchStart();
-              }
-              else {
-                _handleSearchEnd();
-              }
-            });
-          },),
-        ]
-    );
-  }
-
-  // List<ChildItem> _buildList() {
-  //   return widget(child: ChildItem(idMeals: _meals.idMeals, strThumb: _meals.strMealsThumb, strInstructions: _meals.strMealsInstructions));
-  // }
-
-  // List<ChildItem> _buildSearchList() {
-  //   if (_searchText.isEmpty) {
-  //     return _list.map((contact) => new ChildItem(contact))
-  //         .toList();
-  //   }
-  //   else {
-  //     List<String> _searchList = List();
-  //     for (int i = 0; i < _list.length; i++) {
-  //       String  name = _list.elementAt(i);
-  //       if (name.toLowerCase().contains(_searchText.toLowerCase())) {
-  //         _searchList.add(name);
-  //       }
-  //     }
-  //     return _searchList.map((contact) => new ChildItem(contact))
-  //         .toList();
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: key,
       appBar: AppBar(
         title: Text('Search Meals'),
       ),
       body: RefreshIndicator(
         key: _refreshKey,
-        onRefresh: _refresh,
+        // onRefresh: _refresh,
         child: FutureBuilder<ModelMeals>(),
       ),
     );
   }
-}
 
-class ChildItem extends StatelessWidget {
-  final String strMeals;
-  final String idMeals;
-  final String strThumb;
-  final String strInstructions;
-
-  const ChildItem({Key key, 
-    this.strMeals, 
-    this.idMeals, 
-    this.strThumb,
-    this.strInstructions
-    }) : super(key: key);
-
-  
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return ListTile(
-      leading: Image.network(this.strThumb),
-      title: Text(
-        this.strMeals,
+  Widget _buildTextField(List listMeals) {
+    return TypeAheadFormField(
+      textFieldConfiguration: TextFieldConfiguration(
+        autofocus: false,
+        controller: _serachQuery,
         style: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.bold
+          color: Colors.black26,
+          fontSize: 18
+        ),
+        keyboardType: TextInputType.text,
+        decoration: InputDecoration(
+          labelText: "Search title meals",
+          labelStyle: TextStyle(
+            color: Colors.black12
+          ),
+          enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.blueAccent)
+          )
         )
       ),
-      subtitle: Text(
-        this.strInstructions,
-        style: TextStyle(
-          fontSize: 14,
-        )
-      ),
-      onTap: () {
-        Route route = MaterialPageRoute(
-          builder: (context) => DetailScreen(idMeals: this.idMeals, strMeals: this.strMeals)
+      suggestionsCallback: (String query) {
+        // ModelListMeals list = _serviceSearch.getSearchMeals(query);
+        // return ;
+      },
+      onSuggestionSelected: (ListMeals meals) {
+        setState(() {
+          this._meals = meals;
+        });
+        _serachQuery.text = meals.strMeals;
+      },
+
+      noItemsFoundBuilder: (context) {
+        return ListTile(
+          title: Text(
+            'Meals not found.'
+          ),
         );
-        Navigator.push(context, route);
+      },
+
+      itemBuilder: (context, ListMeals meals) {
+        return ListTile(
+          title: Text(
+            meals.strMeals
+          ),
+          leading: Image.network(meals.strMealsThumb),
+        );
       },
     );
   }

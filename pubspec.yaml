@@ -31,6 +31,7 @@ dependencies:
   progress_dialog: ^1.2.0
   connectivity: ^0.4.3+2
   font_awesome_flutter: ^8.5.0
+  flutter_typeahead: ^1.6.1
 
 dev_dependencies:
   flutter_test:
@@ -54,6 +55,12 @@ flutter:
     - assets/resto.jpg
     - assets/vegetables.png
     - assets/splash.jpg
+    - assets/appsbg.jpg
+    - assets/dev.jpg
+    - assets/devs.jpg
+    - assets/user_lg.jpg
+    - assets/user.jpg
+    - assets/saya.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

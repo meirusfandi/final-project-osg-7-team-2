@@ -31,3 +31,16 @@ class ListMeals {
     strMealsThumb: json["strMealThumb"]
   );
 }
+
+List<ListMeals> getMealsSuggestions(String query, List<ListMeals> meals) {
+  List<ListMeals> matches = List();
+
+  matches.addAll(meals);
+  matches.retainWhere((meal) => meal.strMeals.toLowerCase().contains(query.toLowerCase()));
+
+  if (query == '') {
+    return meals;
+  } else {
+    return matches;
+  }
+}

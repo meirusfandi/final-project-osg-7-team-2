@@ -1,3 +1,5 @@
+import 'package:final_project_osg7/core/local/helper/database_helper.dart';
+import 'package:final_project_osg7/core/model/model_favorite.dart';
 import 'package:final_project_osg7/core/model/model_meals.dart';
 import 'package:final_project_osg7/core/network/service_details.dart';
 import 'package:flutter/material.dart';
@@ -40,6 +42,24 @@ class _DetailScreenState extends State<DetailScreen> {
 
   ServiceDetails serviceDetails;
   Future<ModelMeals> meals;
+
+  void addFavorite() async {
+    Meals _meal = Meals();
+    serviceDetails.getDetails(widget.idMeals).then((_meals) {
+      setState(() => _meal = _meals as Meals);
+    });
+
+    Favorite favorite = Favorite(
+    idMeals : _meal.idMeals,
+    strMeals: _meal.strMeals,
+    strArea: _meal.strArea,
+    strCategory: _meal.strCategory,
+    strMealsInstructions: _meal.strMealsInstructions,
+    strMealsThumb: _meal.strMealsThumb,
+    strTags: _meal.strTags);
+
+    await DatabaseHelper.insert(favorite);
+  }
 
   @override
   void initState() {
@@ -251,7 +271,20 @@ class _DetailScreenState extends State<DetailScreen> {
                                   fontSize: 16,
                                 )
                               ),
-                            )
+                            ),
+
+                            // Padding(
+                            //   padding: EdgeInsets.all(8.0),
+                            //   child: RaisedButton(
+                            //     color: Colors.red,
+                            //     hoverColor: Colors.redAccent,
+                            //     textColor: Colors.white,
+                            //     child: Text(
+                            //       'Save'
+                            //     ),
+                            //     onPressed: addFavorite,
+                            //   ),
+                            // )
                           ],
                         ),
                       );
@@ -277,4 +310,23 @@ class _DetailScreenState extends State<DetailScreen> {
       )
     );
   }
+
+  // Future<List<Widget>> actionButton() async {
+  //   Favorite favorite = await DatabaseHelper.getDataById(widget.idMeals);
+
+  //   if (favorite == null) {
+
+  //   } else {
+  //     return RaisedButton(
+  //       color: Colors.white,
+  //       textColor: Colors.red,
+  //       child: Text(
+  //         'Add Favorite',
+  //         style: TextStyle(
+  //           fontSize: 20
+  //         )
+  //       ), onPressed: addFavorite,
+  //     );
+  //   }
+  // }
 }
