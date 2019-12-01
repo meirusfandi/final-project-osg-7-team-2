@@ -8,11 +8,11 @@ Aplikasi Flutter daftar makanan (Tugas Akhir - OSG07) Team 2 dengan fitur :
 - menu (drawer / bottom navigation)
 
 ### Screenshot
-![ESPN Mobile App](https://optimus.hoster.co.id:2083/cpsess4163770457/viewer/home%2fjicgqidt%2fres.meirusfandi.com%2fassets%2fimages%2feudeka%2ffinal/list_categories.jpg)
-![ESPN Mobile App](https://optimus.hoster.co.id:2083/cpsess4163770457/viewer/home%2fjicgqidt%2fres.meirusfandi.com%2fassets%2fimages%2feudeka%2ffinal/list_meals.jpg)
-![ESPN Mobile App](https://optimus.hoster.co.id:2083/cpsess4163770457/viewer/home%2fjicgqidt%2fres.meirusfandi.com%2fassets%2fimages%2feudeka%2ffinal/detail_meals.jpg)
-![ESPN Mobile App](https://optimus.hoster.co.id:2083/cpsess4163770457/viewer/home%2fjicgqidt%2fres.meirusfandi.com%2fassets%2fimages%2feudeka%2ffinal/about_us.jpg)
-![ESPN Mobile App](https://optimus.hoster.co.id:2083/cpsess4163770457/viewer/home%2fjicgqidt%2fres.meirusfandi.com%2fassets%2fimages%2feudeka%2ffinal/about_us_2.jpg)
+![ESPN Mobile App](http://res.meirusfandi.com/assets/images/eudeka/final/list_categories.jpg)
+![ESPN Mobile App](http://res.meirusfandi.com/assets/images/eudeka/final/list_meals.jpg)
+![ESPN Mobile App](http://res.meirusfandi.com/assets/images/eudeka/final/detail_meals.jpg)
+![ESPN Mobile App](http://res.meirusfandi.com/assets/images/eudeka/final/about_us.jpg)
+![ESPN Mobile App](http://res.meirusfandi.com/assets/images/eudeka/final/about_us_2.jpg)
 
 ### Built With
 - [Flutter](https://flutter.dev)
