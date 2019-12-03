@@ -1,7 +1,6 @@
 import 'package:final_project_osg7/ui/home/about_us.dart';
 import 'package:final_project_osg7/ui/home/dashboard.dart';
 import 'package:final_project_osg7/ui/home/favorite.dart';
-import 'package:final_project_osg7/ui/home/notifications.dart';
 import 'package:final_project_osg7/ui/home/search.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -70,6 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
               MaterialButton(
                 minWidth: 40,
                 onPressed: () {
+                  showToast('Search Menu Not Available now !', duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
                   setState(() {
                     _currentScreen = SearchMealsScreen();
                     _currentIndex = 1;
