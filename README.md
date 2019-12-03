@@ -20,28 +20,29 @@ Aplikasi Flutter daftar makanan (Tugas Akhir - OSG07) Team 2 dengan fitur :
 - [BLoC](https://pub.dev/packages/bloc)
 
 ### Created By
-- [Mei Rusfandi](https://meirusfandi.com) as #Project Leader
-    - Halaman Splash Screen
-    - Data Model Meals Category
-    - Fungsi REST API List Category Meals
-    - Design List Category Meals
-    - Menu bottom navigation
-- Joko Waluyo
-    - Halaman tentang
-    - Fungsi detail tentang developer
-    - Fungsi CRUD SQlite
-- Deddy Triyadi Barnawan
-    - Design List Meals
-    - Data Model List Meals
-    - Fungsi REST API List Meals
-- Hendra Basri 
-    - Design Detail Meals 
-    - Data Model Detail Meals
-    - Fungsi REST API Detail Meals
-- Mustofa Kamal
-    - Design Search View Meals
-    - Data Model List Meals
-    - Fungsi REST API List Search Meals
+- [Mei Rusfandi](https://meirusfandi.com) as #Project Leader (Success Implement)
+    - Halaman Splash Screen (point 2)
+    - Data Model Meals Category (point 1)
+    - Fungsi REST API List Category Meals (point 3)
+    - Design List Category Meals (point 2)
+    - Menu bottom navigation (point 2)
+    - Halaman tentang (point 1)
+    - Design List Meals (point 2)
+    - Data Model List Meals (point 1)
+    - Fungsi REST API List Meals (point 3)
+    - Design Detail Meals (point 2)
+    - Data Model Detail Meals (point 1)
+    - Fungsi REST API Detail Meals (point 3)
+    
+- Joko Waluyo (Not implement)
+    - Fungsi detail tentang developer (point 0) 
+    - Fungsi CRUD SQlite (point 0)
+- Deddy Triyadi Barnawan (Not implement)
+- Hendra Basri (Not implement) 
+- Mustofa Kamal (Not implement)
+    - Design Search View Meals (point 0)
+    - Data Model List Meals (point 0)
+    - Fungsi REST API List Search Meals (point 0)
 
 ---
 
